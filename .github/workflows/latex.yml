@@ -1,0 +1,28 @@
+name: Compile anonymous LaTeX templates
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile full-paper template
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+      - name: Compile extended-abstract template
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: extended-abstract.tex
+          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+      - name: Save compiled PDFs for layout review
+        uses: actions/upload-artifact@v4
+        with:
+          name: ica-cm-anonymous-examples
+          path: |
+            main.pdf
+            extended-abstract.pdf

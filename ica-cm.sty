@@ -1,0 +1,81 @@
+%% Unofficial ICA 2027 Computational Methods submission format.
+%% Mandatory CM rules: single-column PDF, single spacing, anonymous manuscript.
+%% 12pt, US Letter, one-inch margins and APA-like heading/citation layout are
+%% conservative editorial defaults, not all mandatory CM-specific rules.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ica-cm}[2026/10/19 v1.0 ICA CM 2027 unofficial format]
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[english]{babel}
+\RequirePackage[letterpaper,margin=1in]{geometry}
+\RequirePackage{newtxtext,newtxmath}
+\RequirePackage{microtype}
+\RequirePackage{setspace}
+\singlespacing
+\RequirePackage{indentfirst}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\RequirePackage{amsmath}
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+\RequirePackage{csquotes}
+\RequirePackage{titlesec}
+\RequirePackage{caption}
+\RequirePackage[section]{placeins}
+\RequirePackage{fancyhdr}
+\RequirePackage[hidelinks,unicode,pdfauthor={},pdftitle={Anonymous ICA Computational Methods Submission},pdfsubject={},pdfkeywords={}]{hyperref}
+\RequirePackage[backend=biber,style=apa,sorting=nyt,doi=true,url=true,isbn=false]{biblatex}
+
+%% APA-inspired headings, with no numbered sections.
+\setcounter{secnumdepth}{0}
+\titleformat{\section}{\normalfont\normalsize\bfseries\centering}{}{0pt}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{}{0pt}{}
+\titlespacing*{\section}{0pt}{1.1\baselineskip}{0.6\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.9\baselineskip}{0.35\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0.8\baselineskip}{0.3\baselineskip}
+
+%% Numbered pages, no author header or identifying running head.
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{15pt}
+
+%% APA-inspired display: bold number, italic title, no vertical table rules.
+\DeclareCaptionLabelSeparator{apanewline}{\\}
+\captionsetup{font=normalsize,labelfont=bf,textfont=it,
+  labelsep=apanewline,justification=raggedright,singlelinecheck=false}
+\captionsetup[table]{position=top,skip=6pt}
+\captionsetup[figure]{position=top,skip=6pt}
+
+%% Anonymous title page: intentionally contains no author or affiliation fields.
+\newcommand{\ICATitlePage}[3]{%
+  \thispagestyle{fancy}%
+  \vspace*{2.2cm}%
+  \begin{center}
+    {\bfseries\Large #1\par}
+    \vspace{1.2cm}
+    {\normalsize ICA 2027 -- Computational Methods Division\par}
+    \vspace{0.6cm}
+    {\normalsize #2\par}
+    \vspace{0.6cm}
+    {\normalsize Main-text word count: #3\par}
+  \end{center}
+  \vfill
+  \clearpage
+}
+
+%% Unindented abstract on its own page, like common APA manuscript style.
+\newenvironment{ICAAbstract}{%
+  \begin{center}\bfseries Abstract\end{center}\noindent\ignorespaces
+}{\par}
+
+\newcommand{\ICAKeywords}[1]{%
+  \par\noindent\textit{Keywords:} #1\par}
+
+%% Notes beneath tables or figures (APA-style note prefix).
+\newcommand{\ICANote}[1]{\par\vspace{0.25\baselineskip}\noindent\textit{Note.} #1\par}
+
+\raggedbottom

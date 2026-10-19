@@ -1,0 +1,108 @@
+% ICA 2027 Computational Methods -- FULL PAPER example (unofficial template).
+% Review copy only: do not insert names, affiliations, acknowledgments,
+% grant identifiers or personally identifying links anywhere in the PDF.
+\documentclass[12pt,letterpaper,oneside]{article}
+\usepackage{ica-cm}
+\addbibresource{references.bib}
+
+% Update BOTH fields before submission. The CM full-paper limit is 8,000
+% words, EXCLUDING tables, references, and appendices (see the official CFP).
+\newcommand{\PaperTitle}{Who Should Code Next? Budget-Aware Collaboration for Reliable Content Analysis}
+\newcommand{\MainWordCount}{TO BE UPDATED}
+
+\begin{document}
+\ICATitlePage{\PaperTitle}{Full Paper}{\MainWordCount}
+
+\begin{ICAAbstract}
+Replace this paragraph with a concise summary of the communication-research
+problem, research questions, design, empirical findings, and contributions.
+Do not assert results that have not been observed. Check the current ScholarOne
+submission form for any abstract-length field requirements.
+\end{ICAAbstract}
+\ICAKeywords{content analysis, computational methods, language models, human--AI collaboration}
+\clearpage
+
+\section{Introduction}
+Explain why the problem matters for communication research, identify a precise
+methodological or theoretical gap, and summarize the contributions. The
+collaborative content-analysis framework SCALE offers one example of related
+work \parencite{zhao2025scale}. Replace all instructional text before submission.
+
+\section{Literature Review and Research Questions}
+Connect prior work to constructs such as coding reliability, measurement
+validity, and the division of labor between human and automated coders.
+\subsection{Research Questions}
+\noindent\textbf{RQ1.} Under what conditions does an additional AI coder improve coding reliability?
+
+\noindent\textbf{RQ2.} How does resource allocation affect measurement quality and cost?
+
+\section{Methods}
+\subsection{Data and Codebook}
+Describe corpus provenance, sampling, coding units, codebook, human references,
+and relevant ethical approvals or privacy protections.
+\subsection{Coding Procedure}
+Specify agent prompts, model versions, random seeds, budgets, adjudication,
+and where human intervention occurs. Cite code and data where appropriate,
+using anonymous links during double-blind review.
+\subsection{Evaluation}
+Define metrics before the analysis. For illustration, an error-aware objective
+could be written as
+\begin{equation}
+  J(\pi)=\mathbb{E}_{x}\bigl[L(\hat{y}_{\pi}(x),y(x))\bigr]
+      +\lambda\,\mathbb{E}_{x}\bigl[C_{\pi}(x)\bigr].
+  \label{eq:objective}
+\end{equation}
+Explain all symbols and the estimand; an equation alone does not establish a
+research contribution.
+
+\section{Results}
+Report results with uncertainty estimates, relevant robustness analyses,
+and statistical comparisons. Table~\ref{tab:example} is a FORMATTING EXAMPLE
+only: it contains no study results.
+
+\begin{table}[htbp]
+  \caption{Illustrative Layout for Comparing Coding Conditions}
+  \label{tab:example}
+  \centering
+  \begin{tabular}{lcc}
+    \toprule
+    Condition & Coding quality & Cost per item \\
+    \midrule
+    Fixed allocation & --- & --- \\
+    Adaptive allocation & --- & --- \\
+    \bottomrule
+  \end{tabular}
+  \ICANote{Dashes are placeholders; replace with actual estimates and define units.}
+\end{table}
+
+\begin{figure}[htbp]
+  \caption{Example Figure Placement Within a Single-Column Manuscript}
+  \label{fig:example}
+  \centering
+  \fbox{\parbox[c][1.2in][c]{0.85\linewidth}{\centering
+    Replace with an anonymized figure, for example a cost--quality curve.}}
+  \ICANote{Replace this explanatory placeholder with a figure note.}
+\end{figure}
+
+\section{Discussion}
+Interpret what the findings mean for communication scholarship, including
+construct validity and practical workflow implications. Distinguish observed
+results from interpretation.
+\subsection{Limitations and Future Work}
+Discuss task selection, model change over time, correlated coder errors,
+selection bias, and human-label uncertainty where relevant.
+
+\section{Conclusion}
+Conclude with the substantive methodological or theoretical advance.
+
+\printbibliography[title={References}]
+
+% OPTIONAL: A CM full paper may include up to 10 single-spaced appendix pages,
+% OR an anonymous online appendix of unrestricted length. Appendix materials
+% must be excluded from the 8,000-word main-paper count.
+% \clearpage
+% \appendix
+% \section{Additional Coding Instructions}
+% Add only anonymized supplementary material; check appendix page count.
+
+\end{document}
