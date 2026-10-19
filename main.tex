@@ -1,108 +1,116 @@
-% ICA 2027 Computational Methods -- FULL PAPER example (unofficial template).
+% ICA 2027 Computational Methods -- FULL PAPER skeleton (unofficial template).
 % Review copy only: do not insert names, affiliations, acknowledgments,
 % grant identifiers or personally identifying links anywhere in the PDF.
 \documentclass[12pt,letterpaper,oneside]{article}
-\usepackage{ica-cm}
-\addbibresource{references.bib}
+% Compile: pdflatex main.tex -> bibtex main -> pdflatex main.tex (twice).
+% apacite supplies APA 6 references for the classic BibTeX workflow.
+\usepackage[bibtex]{ica-cm}
+\bibliographystyle{apacite}
 
-% Update BOTH fields before submission. The CM full-paper limit is 8,000
-% words, EXCLUDING tables, references, and appendices (see the official CFP).
-\newcommand{\PaperTitle}{Who Should Code Next? Budget-Aware Collaboration for Reliable Content Analysis}
-\newcommand{\MainWordCount}{TO BE UPDATED}
+% Replace every bracketed placeholder and the placeholder reference before submission.
+% The CM full-paper limit is 8,000 words, EXCLUDING tables, references,
+% and appendices. Title and abstract occupy separate pages.
+\newcommand{\PaperTitle}{[Paper Title: Topic and Main Contribution]}
+\newcommand{\PaperShortTitle}{[Short Title for the Running Head]}
+\ICARunningTitle{\PaperShortTitle}
 
 \begin{document}
-\ICATitlePage{\PaperTitle}{Full Paper}{\MainWordCount}
+\ICAMakeTitle{\PaperTitle}
 
 \begin{ICAAbstract}
-Replace this paragraph with a concise summary of the communication-research
-problem, research questions, design, empirical findings, and contributions.
-Do not assert results that have not been observed. Check the current ScholarOne
-submission form for any abstract-length field requirements.
+[Summarize the communication-research problem, research question, study design,
+main findings, and contribution. Report only findings supported by your study.]
+% Check the current ScholarOne form for abstract-length field requirements.
 \end{ICAAbstract}
-\ICAKeywords{content analysis, computational methods, language models, human--AI collaboration}
-\clearpage
+\ICAKeywords{[Research topic], [Theoretical concept], [Method], [Research context]}
 
+\ICABeginBody
 \section{Introduction}
-Explain why the problem matters for communication research, identify a precise
-methodological or theoretical gap, and summarize the contributions. The
-collaborative content-analysis framework SCALE offers one example of related
-work \parencite{zhao2025scale}. Replace all instructional text before submission.
+[Introduce the research problem and explain its significance for communication
+scholarship. Identify the gap in existing knowledge, state the study's objective,
+and summarize its contribution.]
 
 \section{Literature Review and Research Questions}
-Connect prior work to constructs such as coding reliability, measurement
-validity, and the division of labor between human and automated coders.
+[Define the central concepts, synthesize relevant literature, and explain how
+prior work motivates the research questions. Replace this placeholder citation
+with a verified source: \citep{reference-placeholder}.]
 \subsection{Research Questions}
-\noindent\textbf{RQ1.} Under what conditions does an additional AI coder improve coding reliability?
+\noindent\textbf{RQ1.} [State the primary research question, identifying the phenomenon or relationship to be examined.]
 
-\noindent\textbf{RQ2.} How does resource allocation affect measurement quality and cost?
+\noindent\textbf{RQ2.} [State a complementary research question, or remove this item if unnecessary.]
 
 \section{Methods}
-\subsection{Data and Codebook}
-Describe corpus provenance, sampling, coding units, codebook, human references,
-and relevant ethical approvals or privacy protections.
-\subsection{Coding Procedure}
-Specify agent prompts, model versions, random seeds, budgets, adjudication,
-and where human intervention occurs. Cite code and data where appropriate,
-using anonymous links during double-blind review.
-\subsection{Evaluation}
-Define metrics before the analysis. For illustration, an error-aware objective
-could be written as
+\subsection{Data and Study Design}
+[Describe the research design, data sources, sampling strategy, unit of analysis,
+and inclusion criteria. Explain how the key concepts are operationalized and
+report relevant ethical approvals or privacy protections.]
+\subsection{Procedure}
+% Disclose actual AI use in the research workflow here, as required by ICA's
+% general submission guidelines; retain anonymity and describe only work done.
+[Describe each step of data collection and processing. Specify the tools,
+software versions, parameters, and other details needed for replication.
+Document actual AI use if applicable, and cite data and software while
+preserving anonymity.]
+\subsection{Analysis and Validation}
+[Specify the analytical strategy, measures, comparison conditions, validation
+procedures, and treatment of uncertainty. Include an equation only if needed.]
 \begin{equation}
-  J(\pi)=\mathbb{E}_{x}\bigl[L(\hat{y}_{\pi}(x),y(x))\bigr]
-      +\lambda\,\mathbb{E}_{x}\bigl[C_{\pi}(x)\bigr].
-  \label{eq:objective}
+  \text{[Insert the model specification or analysis equation.]}
+  \label{eq:placeholder}
 \end{equation}
-Explain all symbols and the estimand; an equation alone does not establish a
-research contribution.
+[Define every symbol in Equation~\ref{eq:placeholder} and explain how the
+specification addresses the research question, or remove this equation block.]
 
 \section{Results}
-Report results with uncertainty estimates, relevant robustness analyses,
-and statistical comparisons. Table~\ref{tab:example} is a FORMATTING EXAMPLE
-only: it contains no study results.
+[Organize the findings by research question. Report estimates, uncertainty,
+and relevant robustness analyses. Explain what Table~\ref{tab:placeholder}
+and Figure~\ref{fig:placeholder} show, or remove unused display blocks.]
 
 \begin{table}[htbp]
-  \caption{Illustrative Layout for Comparing Coding Conditions}
-  \label{tab:example}
+  \caption{[Table Title: Describe the Comparison or Summary]}
+  \label{tab:placeholder}
   \centering
   \begin{tabular}{lcc}
     \toprule
-    Condition & Coding quality & Cost per item \\
+    {[Group or model]} & {[Primary metric]} & {[Secondary metric]} \\
     \midrule
-    Fixed allocation & --- & --- \\
-    Adaptive allocation & --- & --- \\
+    {[Group or model A]} & {[Value]} & {[Value]} \\
+    {[Group or model B]} & {[Value]} & {[Value]} \\
     \bottomrule
   \end{tabular}
-  \ICANote{Dashes are placeholders; replace with actual estimates and define units.}
+  \ICANote{[Define measures, units, abbreviations, and uncertainty indicators.]}
 \end{table}
 
 \begin{figure}[htbp]
-  \caption{Example Figure Placement Within a Single-Column Manuscript}
-  \label{fig:example}
   \centering
   \fbox{\parbox[c][1.2in][c]{0.85\linewidth}{\centering
-    Replace with an anonymized figure, for example a cost--quality curve.}}
-  \ICANote{Replace this explanatory placeholder with a figure note.}
+    [Insert an anonymized plot, diagram, or other research figure.]}}
+  \caption{[Figure Title: Describe the Relationship or Process]}
+  \label{fig:placeholder}
+  \ICANote{[Explain axes, symbols, panels, and other details needed to read the figure.]}
 \end{figure}
 
 \section{Discussion}
-Interpret what the findings mean for communication scholarship, including
-construct validity and practical workflow implications. Distinguish observed
-results from interpretation.
+[Answer the research questions, relate the findings to prior work, and explain
+their theoretical, methodological, or practical implications for communication
+research. Distinguish evidence from interpretation.]
 \subsection{Limitations and Future Work}
-Discuss task selection, model change over time, correlated coder errors,
-selection bias, and human-label uncertainty where relevant.
+[Discuss limitations of the design, data, measures, and analysis. Specify the
+boundaries of generalization and identify concrete directions for future work.]
 
 \section{Conclusion}
-Conclude with the substantive methodological or theoretical advance.
+[State the main contribution and its significance without introducing new
+evidence or claims beyond the study's scope.]
 
-\printbibliography[title={References}]
+\clearpage
+\bibliography{references}
 
 % OPTIONAL: A CM full paper may include up to 10 single-spaced appendix pages,
 % OR an anonymous online appendix of unrestricted length. Appendix materials
 % must be excluded from the 8,000-word main-paper count.
 % \clearpage
 % \appendix
-% \section{Additional Coding Instructions}
-% Add only anonymized supplementary material; check appendix page count.
+% \section{[Appendix Title]}
+% [Provide anonymized supplementary methods, analyses, or materials.]
 
 \end{document}

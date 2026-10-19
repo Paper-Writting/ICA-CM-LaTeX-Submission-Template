@@ -1,21 +1,33 @@
 %% Unofficial ICA 2027 Computational Methods submission format.
 %% Mandatory CM rules: single-column PDF, single spacing, anonymous manuscript.
-%% 12pt, US Letter, one-inch margins and APA-like heading/citation layout are
-%% conservative editorial defaults, not all mandatory CM-specific rules.
+%% Latin Modern, one-inch margins, and separate title/abstract pages follow
+%% the reference manuscript at https://arxiv.org/abs/2504.10878.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ica-cm}[2026/10/19 v1.0 ICA CM 2027 unofficial format]
+\ProvidesPackage{ica-cm}[2026/10/20 v1.2 ICA CM 2027 anonymous submission format]
+
+%% Opt into the classic BibTeX workflow; existing documents use Biber by default.
+\newif\ifICABibTeX
+\DeclareOption{bibtex}{\ICABibTeXtrue}
+\ProcessOptions\relax
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english]{babel}
 \RequirePackage[letterpaper,margin=1in]{geometry}
-\RequirePackage{newtxtext,newtxmath}
+\RequirePackage{lmodern}
 \RequirePackage{microtype}
 \RequirePackage{setspace}
 \singlespacing
 \RequirePackage{indentfirst}
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0pt}
+%% Keep words intact and let the right edge follow natural line lengths.
+\AtBeginDocument{%
+  \raggedright
+  \setlength{\parindent}{0.5in}%
+  \hyphenpenalty=10000
+  \exhyphenpenalty=10000
+}
 \RequirePackage{amsmath}
 \RequirePackage{graphicx}
 \RequirePackage{booktabs}
@@ -24,8 +36,13 @@
 \RequirePackage{caption}
 \RequirePackage[section]{placeins}
 \RequirePackage{fancyhdr}
+\ifICABibTeX
+  \RequirePackage[natbibapa]{apacite}
+\fi
 \RequirePackage[hidelinks,unicode,pdfauthor={},pdftitle={Anonymous ICA Computational Methods Submission},pdfsubject={},pdfkeywords={}]{hyperref}
-\RequirePackage[backend=biber,style=apa,sorting=nyt,doi=true,url=true,isbn=false]{biblatex}
+\ifICABibTeX\else
+  \RequirePackage[backend=biber,style=apa,sorting=nyt,doi=true,url=true,isbn=false]{biblatex}
+\fi
 
 %% APA-inspired headings, with no numbered sections.
 \setcounter{secnumdepth}{0}
@@ -36,46 +53,54 @@
 \titlespacing*{\subsection}{0pt}{0.9\baselineskip}{0.35\baselineskip}
 \titlespacing*{\subsubsection}{0pt}{0.8\baselineskip}{0.3\baselineskip}
 
-%% Numbered pages, no author header or identifying running head.
+%% Short title and page number on body pages; title and abstract have own styles.
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
-\setlength{\headheight}{15pt}
+\setlength{\headheight}{15.2pt}
+\newcommand{\ICARunningTitle}[1]{%
+  \fancyhead[L]{\normalfont\normalsize\MakeUppercase{#1}}}
 
 %% APA-inspired display: bold number, italic title, no vertical table rules.
 \DeclareCaptionLabelSeparator{apanewline}{\\}
 \captionsetup{font=normalsize,labelfont=bf,textfont=it,
   labelsep=apanewline,justification=raggedright,singlelinecheck=false}
 \captionsetup[table]{position=top,skip=6pt}
-\captionsetup[figure]{position=top,skip=6pt}
+\captionsetup[figure]{position=bottom,skip=6pt}
 
-%% Anonymous title page: intentionally contains no author or affiliation fields.
-\newcommand{\ICATitlePage}[3]{%
-  \thispagestyle{fancy}%
-  \vspace*{2.2cm}%
-  \begin{center}
-    {\bfseries\Large #1\par}
-    \vspace{1.2cm}
-    {\normalsize ICA 2027 -- Computational Methods Division\par}
-    \vspace{0.6cm}
-    {\normalsize #2\par}
-    \vspace{0.6cm}
-    {\normalsize Main-text word count: #3\par}
-  \end{center}
-  \vfill
+%% Anonymous title page, followed by the repeated title on the abstract page.
+\newcommand{\ICAMakeTitle}[1]{%
+  \hypersetup{pdftitle={#1}}%
   \clearpage
+  \thispagestyle{empty}%
+  \vspace*{2cm}%
+  \par\begingroup
+    \centering
+    {\bfseries\Large #1\par}
+  \endgroup
+  \clearpage
+  \thispagestyle{plain}%
+  \par\begingroup
+    \centering
+    {\bfseries\normalsize #1\par}
+  \endgroup
+  \addvspace{0.5\baselineskip}%
 }
 
-%% Unindented abstract on its own page, like common APA manuscript style.
+%% Abstract and keywords occupy their own page; the body starts on the next.
 \newenvironment{ICAAbstract}{%
   \begin{center}\bfseries Abstract\end{center}\noindent\ignorespaces
 }{\par}
 
 \newcommand{\ICAKeywords}[1]{%
-  \par\noindent\textit{Keywords:} #1\par}
+  \par\noindent\textbf{Keywords:} #1\par}
+
+\newcommand{\ICABeginBody}{\clearpage}
 
 %% Notes beneath tables or figures (APA-style note prefix).
-\newcommand{\ICANote}[1]{\par\vspace{0.25\baselineskip}\noindent\textit{Note.} #1\par}
+\newcommand{\ICANote}[1]{%
+  \par\vspace{0.25\baselineskip}%
+  \begingroup\raggedright\noindent\textit{Note.} #1\par\endgroup}
 
 \raggedbottom

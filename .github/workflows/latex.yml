@@ -1,7 +1,8 @@
-name: Compile anonymous LaTeX templates
+name: Compile anonymous placeholder templates
 on:
   push:
   pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -9,20 +10,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Compile full-paper template
-        uses: xu-cheng/latex-action@v3
+      - name: Compile both templates with pdfLaTeX and BibTeX
+        uses: xu-cheng/texlive-action@v3
         with:
-          root_file: main.tex
-          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
-      - name: Compile extended-abstract template
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: extended-abstract.tex
-          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
-      - name: Save compiled PDFs for layout review
+          scheme: full
+          run: |
+            set -euo pipefail
+            for document in main extended-abstract; do
+              pdflatex -interaction=nonstopmode -halt-on-error -file-line-error "${document}.tex"
+              bibtex "${document}"
+              pdflatex -interaction=nonstopmode -halt-on-error -file-line-error "${document}.tex"
+              pdflatex -interaction=nonstopmode -halt-on-error -file-line-error "${document}.tex"
+              test -s "${document}.pdf"
+            done
+      - name: Save placeholder PDFs for layout review
         uses: actions/upload-artifact@v4
         with:
-          name: ica-cm-anonymous-examples
+          name: ica-cm-placeholder-templates
+          if-no-files-found: error
           path: |
             main.pdf
             extended-abstract.pdf
+      - name: Save build logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ica-cm-build-logs
+          if-no-files-found: ignore
+          path: |
+            main.log
+            main.blg
+            extended-abstract.log
+            extended-abstract.blg

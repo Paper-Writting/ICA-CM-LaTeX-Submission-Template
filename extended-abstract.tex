@@ -1,38 +1,49 @@
-% ICA 2027 Computational Methods -- EXTENDED ABSTRACT example.
+% ICA 2027 Computational Methods -- EXTENDED ABSTRACT skeleton.
 % Target length: 1,000--2,000 words excluding tables and references.
 % A maximum of SIX figures/tables combined is permitted by the CM CFP.
+% Review copy: omit author names, affiliations, and identifying acknowledgments.
 \documentclass[12pt,letterpaper,oneside]{article}
-\usepackage{ica-cm}
-\addbibresource{references.bib}
+% Compile: pdflatex extended-abstract.tex -> bibtex extended-abstract -> pdflatex (twice).
+% apacite supplies APA 6 references for the classic BibTeX workflow.
+\usepackage[bibtex]{ica-cm}
+\bibliographystyle{apacite}
 
-\newcommand{\PaperTitle}{Cost-Aware Collaborative Coding in Communication Research}
-\newcommand{\MainWordCount}{TO BE UPDATED}
+% Replace every bracketed placeholder and the placeholder reference before submission.
+\newcommand{\PaperTitle}{[Extended Abstract Title: Topic and Contribution]}
+\newcommand{\PaperShortTitle}{[Short Title for the Running Head]}
+\ICARunningTitle{\PaperShortTitle}
 
 \begin{document}
-\ICATitlePage{\PaperTitle}{Extended Abstract}{\MainWordCount}
+\ICAMakeTitle{\PaperTitle}
 
 \begin{ICAAbstract}
-Briefly describe the motivation, research questions, design, available findings,
-and expected contribution. Replace all illustrative text before submission.
+[Briefly summarize the research problem, research question, design, available
+findings, and contribution. Indicate the study's current stage accurately.]
 \end{ICAAbstract}
-\ICAKeywords{computational methods, content analysis, large language models}
-\clearpage
+\ICAKeywords{[Research topic], [Theoretical concept], [Method], [Research context]}
 
+\ICABeginBody
 \section{Motivation and Related Work}
-Explain the communication-research problem and relationship to existing
-collaborative coding systems, such as SCALE \parencite{zhao2025scale}.
+[Explain why the problem matters for communication research, identify the gap
+in prior work, and define the relevant concepts. Replace this placeholder
+citation with a verified source: \citep{reference-placeholder}.]
 
 \section{Research Questions and Methods}
-State the research question, sampling frame, codebook, validation protocol,
-and planned or completed analysis. Name the human benchmark and model baselines.
+% Disclose actual AI use in the research workflow here while retaining anonymity.
+[State the research question and describe the design, data, sampling, measures,
+and analytical strategy. Explain how the analysis will answer the question,
+describe validation where relevant, and distinguish completed from planned work.]
 
 \section{Preliminary Results or Expected Contribution}
-Clearly distinguish observations from hypotheses or planned measurements.
-Give empirical evidence where available; do not invent results.
+[Report available findings and their uncertainty. If work remains in progress,
+state what has been completed and what remains to be done. Explain the intended
+contribution without presenting anticipated outcomes as observed results.]
 
 \section{Implications}
-Explain the anticipated substantive and methodological contribution to
-communication research.
+[Explain the implications for communication scholarship, identify the main
+limitations, and describe how the study advances relevant theory, methods,
+or substantive knowledge.]
 
-\printbibliography[title={References}]
+\clearpage
+\bibliography{references}
 \end{document}
